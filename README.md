@@ -1,8 +1,8 @@
-### NUS FintechSG DevOps Course
+# NUS FintechSG DevOps Course
 
 All things about Dockers, Containers and Kubernates
 
-### CI/CD Assignment Walkthrough
+# CI/CD Assignment Walkthrough
 
 ## Step 1: Create a New Git Repo
 
@@ -38,7 +38,7 @@ CMD ["npm", "start"]
 ```
 
 [Guide](https://www.youtube.com/watch?v=O3SvhpnSZWY)
-Note: Remember to add ```Expose 3000``` in the Dockerfile, this will allow us to access the container on a local browser via ```http://localhost:3000/```
+**Note:** Remember to add ```Expose 3000``` in the Dockerfile, this will allow us to access the container on a local browser via ```http://localhost:3000/```
 
 ## Step 4: Create Git Action to Build and Push Container to Docker Hub
 
