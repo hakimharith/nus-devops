@@ -72,9 +72,9 @@ jobs:
 
 This workflow will login to Docker, build the React App and push it to Docker Hub upon a Git Push to the Master branch.
 
-```${{ secrets.DOCKER_USERNAME }}``` and ```${{ secrets.DOCKER_PASSWORD }}``` are secret variables containing the username and password of your Docker account. Secret allows sensitive information to stay hidden in your code. They can be managed under Settings > Secrets. 
+```${{ secrets.DOCKER_USERNAME }}``` and ```${{ secrets.DOCKER_PASSWORD }}``` are secret variables containing the username and password of your Docker account. Secret variables allow sensitive information to stay hidden in your code. They can be managed under Settings > Secrets. 
 
-[Docker Github Actions](https://github.com/docker/build-push-action)
+[Docker Github Actions](https://github.com/docker/build-push-action)\
 [YouTube Explanation on using Github Actions for Docker](https://www.youtube.com/watch?v=09lZdSpeHAk&t=457s)
 
 ## Step 5: Debug
