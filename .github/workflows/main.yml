@@ -11,11 +11,22 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-      - 
-        name: Build and push Docker images
-        uses: docker/build-push-action@v1
+      -
+        name: Login to DockerHub
+        uses: crazy-max/ghaction-docker-login@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: hakimharith/reactapp
-          tags: latest
+      -
+         name: Docker build
+         run: |
+           docker build ./docker-app -t reactapp
+      -
+         name: Docker tag
+         run: |
+          docker tag a1adb78cba79 hakimharith/reactapp:latest
+      -
+         name: docker push
+         run: |
+           docker push hakimharith/reactapp
+           
