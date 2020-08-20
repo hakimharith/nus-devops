@@ -42,10 +42,46 @@ CMD ["npm", "start"]
 
 ## Step 4: Create Git Action to Build and Push Container to Docker Hub
 
+Under the Actions tab, create a new workflow and add the following text into the YAML file:
+
+```
+name: Login, build and push to Docker
+
+on:
+  push:
+    branches: master
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      name: Checkout code
+      uses: actions/checkout@v2
+
+    - 
+      name: Build and push Docker images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: <YOUR-USERNAME>/<DOCKERHUB-REPO-NAME>
+        tags: latest
+        
+```
+
+This workflow will login to Docker, build the React App and push it to Docker Hub upon a Git Push to the Master branch.
+
+```${{ secrets.DOCKER_USERNAME }}``` and ```${{ secrets.DOCKER_PASSWORD }}``` are secret variables containing the username and password of your Docker account. Secret allows sensitive information to stay hidden in your code. They can be managed under Settings > Secrets. 
+
+[Docker Github Actions](https://github.com/docker/build-push-action)
+[YouTube Explanation on using Github Actions for Docker](https://www.youtube.com/watch?v=09lZdSpeHAk&t=457s)
+
 ## Step 5: Debug
 
 Dicipher the error message, don't give up!
 
+Test it by pulling your container and see if the changes in your React App is reflected via ```http://localhost:3000/```
 
 
 
