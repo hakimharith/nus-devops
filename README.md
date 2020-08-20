@@ -8,7 +8,7 @@ All things about Dockers, Containers and Kubernates
 
 Create a new git repo on your local computer
 
-[Guide] (https://kbroman.org/github_tutorial/pages/init.html)
+[Guide](https://kbroman.org/github_tutorial/pages/init.html)
 
 ## Step 2: Create new React App in Repository
 
@@ -37,7 +37,7 @@ CMD ["npm", "start"]
 
 ```
 
-[Guide] (https://www.youtube.com/watch?v=O3SvhpnSZWY)
+[Guide](https://www.youtube.com/watch?v=O3SvhpnSZWY)
 Note: Remember to add ```Expose 3000``` in the Dockerfile, this will allow us to access the container on a local browser via ```http://localhost:3000/```
 
 ## Step 4: Create Git Action to Build and Push Container to Docker Hub
