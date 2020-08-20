@@ -81,7 +81,7 @@ This workflow will login to Docker, build the React App and push it to Docker Hu
 
 Dicipher the error message, don't give up!
 
-Test it by pulling your container and see if the changes in your React App is reflected via ```http://localhost:3000/```
+Test it by pulling your container and see if the changes in your React App is reflected via [http://localhost:3000/](http://localhost:3000/)
 
 
 
