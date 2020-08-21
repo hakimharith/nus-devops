@@ -4,6 +4,12 @@ All things about Dockers, Containers and Kubernates
 
 # CI/CD Assignment Walkthrough
 
+## Workflow
+
+![](images/workflow-diagram.png)
+
+**Objective:** Build and push a React App to Docker Hub upon each Git push using Grithub actions
+
 ## Step 1: Create a New Git Repo
 
 Create a new git repo on your local computer
