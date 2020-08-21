@@ -26,7 +26,7 @@ Commit the changes to Github.
 
 ## Step 3: Dockerization of React App
 
-Create a new file and name it 'Dockerfile' and add the following text into the file
+Create a new file and name it 'Dockerfile' and add the following text into the file. The Dockerfile has to be in the root folder of your Git repo.
 
 ```
 FROM node:alpine
@@ -45,7 +45,7 @@ CMD ["npm", "start"]
 
 ```
 
-[Guide](https://www.youtube.com/watch?v=O3SvhpnSZWY)
+[Guide](https://www.youtube.com/watch?v=O3SvhpnSZWY)\
 **Note:** Remember to add ```Expose 3000``` in the Dockerfile, this will allow us to access the container on a local browser via ```http://localhost:3000/```
 
 ## Step 4: Create Git Action to Build and Push Container to Docker Hub
