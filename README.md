@@ -18,7 +18,9 @@ Create a new git repo on your local computer
 
 ## Step 2: Create new React App in Repository
 
-Go to the location of your Git Repo in your command prompt and type the following
+Go to the location of your Git Repo in your command prompt and type the following.
+
+Commit the changes to Github.
 
 ```npx create-react-app <APP-NAME>```
 
