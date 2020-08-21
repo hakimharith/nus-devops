@@ -1,68 +1,87 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# NUS FintechSG DevOps Course
 
-## Available Scripts
+All things about Dockers, Containers and Kubernates
 
-In the project directory, you can run:
+# CI/CD Assignment Walkthrough
 
-### `npm start`
+## Step 1: Create a New Git Repo
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Create a new git repo on your local computer
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[Guide](https://kbroman.org/github_tutorial/pages/init.html)
 
-### `npm test`
+## Step 2: Create new React App in Repository
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Go to the location of your Git Repo in your command prompt and type the following
 
-### `npm run build`
+```npx create-react-app <APP-NAME>```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Step 3: Dockerization of React App
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Create a new file and name it 'Dockerfile' and add the following text into the file
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+FROM node:alpine
 
-### `npm run eject`
+WORKDIR '/app'
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+COPY package.json .
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+RUN npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+COPY . .
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+EXPOSE 3000
 
-## Learn More
+CMD ["npm", "start"]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Guide](https://www.youtube.com/watch?v=O3SvhpnSZWY)
+**Note:** Remember to add ```Expose 3000``` in the Dockerfile, this will allow us to access the container on a local browser via ```http://localhost:3000/```
 
-### Code Splitting
+## Step 4: Create Git Action to Build and Push Container to Docker Hub
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Under the Actions tab, create a new workflow and add the following text into the YAML file:
 
-### Analyzing the Bundle Size
+```
+name: Login, build and push to Docker
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+on:
+  push:
+    branches: master
 
-### Making a Progressive Web App
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+    - 
+      name: Checkout code
+      uses: actions/checkout@v2
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+    - 
+      name: Build and push Docker images
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: <YOUR-USERNAME>/<DOCKERHUB-REPO-NAME>
+        tags: latest
+        
+```
 
-### Advanced Configuration
+This workflow will login to Docker, build the React App and push it to Docker Hub upon a Git Push to the Master branch.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```${{ secrets.DOCKER_USERNAME }}``` and ```${{ secrets.DOCKER_PASSWORD }}``` are secret variables containing the username and password of your Docker account. Secret variables allow sensitive information to stay hidden in your code. They can be managed under Settings > Secrets. 
 
-### Deployment
+[Docker Github Actions](https://github.com/docker/build-push-action)\
+[YouTube Explanation on using Github Actions for Docker](https://www.youtube.com/watch?v=09lZdSpeHAk&t=457s)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Step 5: Debug
 
-### `npm run build` fails to minify
+Dicipher the error message, don't give up!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Test it by pulling your container and see if the changes in your React App is reflected via [http://localhost:3000/](http://localhost:3000/)
+
+
+
